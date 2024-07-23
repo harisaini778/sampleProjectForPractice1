@@ -1,7 +1,8 @@
 const dotenv = require("dotenv");
 
-
 dotenv.config();
+
+const userRoutes = require("./routes/userRoutes");
 
 const express = require("express");
 
@@ -13,6 +14,7 @@ app.use(express.json()); // body parser used to parse json payloads from react.j
 
 app.use(express.urlencoded({extended:true})); // parses the urlencode form data application/domain.com, generally used in html frontend
 
+app.use("/users",userRoutes);
 
 const port = process.env.PORT || 5000;
 
