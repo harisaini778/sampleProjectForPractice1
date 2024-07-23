@@ -17,7 +17,7 @@ app.use(express.json()); // body parser used to parse json payloads from react.j
 app.use(express.urlencoded({extended:true})); // parses the urlencode form data application/domain.com, generally used in html frontend
 
 app.use(cors({
-   origin: "http://localhost:3000/"
+   origin: "http://localhost:3000"
 }));
 
 app.use("/users",userRoutes);

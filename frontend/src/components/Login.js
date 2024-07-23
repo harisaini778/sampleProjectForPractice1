@@ -53,11 +53,14 @@ const Login  = () => {
             try {
               
                 e.preventDefault();
+
                 const userData = {
                   name,
                   email,
-                  password
+                  password,
                 };
+
+                console.log("userData while signup is : ",userData);
     
              const res =  await axios.post("http://localhost:5000/users/signup",userData,{
                headers : {
@@ -80,11 +83,11 @@ const Login  = () => {
         <Container className="mt-5">
            {isLoginClicked && <Row>
             <h2 style={{textAlign : "center"}}>Login</h2>
-            <Form onClick={loginFormSubmitHandler}>
+            <Form onSubmit={loginFormSubmitHandler}>
                 <Form.Label className="m-1">Email</Form.Label>
                 <Form.Control type="email" onChange={(e)=>setEmail(e.target.value)} className="m-1"></Form.Control>
                 <Form.Label className="m-1">Password</Form.Label>
-                <Form.Control type="password" onChange={(e)=>setPassword(e.target.password)} className="m-1"></Form.Control>
+                <Form.Control type="password" onChange={(e)=>setPassword(e.target.value)} className="m-1"></Form.Control>
                 <Button type="submit" className="m-1">Login</Button>
                 <p className="m-1">New User ? <span onClick={switchFormHandler}>Signup</span></p>
             </Form>
@@ -97,7 +100,7 @@ const Login  = () => {
                 <Form.Label className="m-1">Email</Form.Label>
                 <Form.Control type="email" onChange={(e)=>setEmail(e.target.value)} className="m-1"></Form.Control>
                 <Form.Label className="m-1">Password</Form.Label>
-                <Form.Control type="password" onChange={(e)=>setPassword(e.target.password)} className="m-1"></Form.Control>
+                <Form.Control type="password" onChange={(e)=>setPassword(e.target.value)} className="m-1"></Form.Control>
                 <Button type="submit" className="m-1">Signup</Button>
                 <p className="m-1">Existing User ? <span onClick={switchFormHandler}>Login here</span></p>
             </Form>}

@@ -23,6 +23,7 @@ const signup = async (req,res) => {
             // res 201 means successfull and created a new record in the db
         }
     }catch(err){
+        console.error("Error during signup:", err); 
         res.status(500).json({message : err}); // 500 means internal server error (Server side error)
     }
     
