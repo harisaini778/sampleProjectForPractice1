@@ -30,7 +30,7 @@ const Login  = () => {
               password
             };
 
-         const res =  await axios.post("",userData,{
+         const res =  await axios.post("http://localhost:5000/users/login",userData,{
            headers : {
             "Content-Type" : "application/json"
            }
@@ -59,7 +59,7 @@ const Login  = () => {
                   password
                 };
     
-             const res =  await axios.post("",userData,{
+             const res =  await axios.post("http://localhost:5000/users/signup",userData,{
                headers : {
                 "Content-Type" : "application/json"
                }
@@ -79,6 +79,7 @@ const Login  = () => {
     return (
         <Container className="mt-5">
            {isLoginClicked && <Row>
+            <h2 style={{textAlign : "center"}}>Login</h2>
             <Form onClick={loginFormSubmitHandler}>
                 <Form.Label className="m-1">Email</Form.Label>
                 <Form.Control type="email" onChange={(e)=>setEmail(e.target.value)} className="m-1"></Form.Control>
@@ -89,9 +90,10 @@ const Login  = () => {
             </Form>
             </Row>}
             <Row>
-           { !isLoginClicked && <Form>
+           { !isLoginClicked && <Form onSubmit={signupFormSubmitHandler}>
+           <h2 style={{textAlign : "center"}}>Signup</h2>
             <Form.Label className="m-1">Name</Form.Label>
-                <Form.Control type="text" onChange={(e)=>setEmail(e.target.value)} className="m-1"></Form.Control>
+                <Form.Control type="text" onChange={(e)=>setName(e.target.value)} className="m-1"></Form.Control>
                 <Form.Label className="m-1">Email</Form.Label>
                 <Form.Control type="email" onChange={(e)=>setEmail(e.target.value)} className="m-1"></Form.Control>
                 <Form.Label className="m-1">Password</Form.Label>

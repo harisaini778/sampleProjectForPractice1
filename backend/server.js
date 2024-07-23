@@ -2,6 +2,8 @@ const dotenv = require("dotenv");
 
 dotenv.config();
 
+const cors = require("cors");
+
 const userRoutes = require("./routes/userRoutes");
 
 const express = require("express");
@@ -13,6 +15,10 @@ const app = express();
 app.use(express.json()); // body parser used to parse json payloads from react.js modern frontend frameworks
 
 app.use(express.urlencoded({extended:true})); // parses the urlencode form data application/domain.com, generally used in html frontend
+
+app.use(cors({
+   origin: "http://localhost:3000/"
+}));
 
 app.use("/users",userRoutes);
 
