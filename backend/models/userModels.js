@@ -1,5 +1,7 @@
 const db = require("../utils/database");
 
+const {DataTypes} = require("sequelize");
+
 const User = db.define("userModel",{
     id : {
         type:DataTypes.INTEGER,
