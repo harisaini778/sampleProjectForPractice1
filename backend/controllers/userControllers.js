@@ -1,5 +1,7 @@
 const User = require("../models/userModels");
 
+const jwt = require("jsonwebtoken");
+
 
 const signup = async (req,res) => {
     const {name,email,password} = req.body;
@@ -42,8 +44,12 @@ const login = async(req,res) =>{
           // 401 res means Unauthorised which indicates that missing password or invalid details 
         }
 
+        const token = jwt.sign({id:authenticateUser.id,email:authenticateUser.email},process.env.JWT_SECRET,{expiresIn : "1h"});
+
+        // 
+
         if(authenticateUser.password===password){
-            res.status(200).json({message : `Login Successfull`});
+            res.status(200).json({message : `Login Successfull`,token,authenticateUser});
         }
 
     }catch(err){
@@ -51,4 +57,25 @@ const login = async(req,res) =>{
     }
 };
 
-module.exports = {signup,login};
+
+const fetchUserInfo = async(req,res) => {
+
+  try {
+
+    console.log("req.user is : ",req.user);
+
+    const email = req.user.email;
+
+    const userInfo =  await User.findOne({where : {email:email}});
+
+    if(userInfo){
+        res.status(201).json({user : userInfo});
+    }
+     
+  } catch(err){
+      console.log("err while fetching users info : ",err);
+      res.status(500).json({message : "Unable to find users info",err:err})
+  }
+}
+
+module.exports = {signup,login,fetchUserInfo};

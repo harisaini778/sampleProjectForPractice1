@@ -6,7 +6,13 @@ import { useState } from "react";
 
 import axios from "axios";
 
+import {useNavigate} from "react-router-dom";
+
+
+
 const Login  = () => {
+
+    const navigate = useNavigate();
 
     const [name,setName] = useState("");
 
@@ -38,6 +44,9 @@ const Login  = () => {
 
         if(res) {
             console.log("form data submitted succesfully : ", res.data);
+            console.log("token is : ",res.data.token);
+            localStorage.setItem("token",res.data.token);
+            navigate("/fetchUsersInfo");
         }
 
         } catch (err) {
